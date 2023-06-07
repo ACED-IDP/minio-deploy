@@ -13,7 +13,7 @@ ansible-galaxy install ricsanfre.minio
 ansible-playbook minio-deploy.yaml
 ```
 
-## Initial Instillation
+## Installation
 
 This playbook aims to replicate the steps used in the initial ACED-IDP Minio deployment at OHSU (based on CentOS).
 
