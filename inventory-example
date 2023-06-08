@@ -1,0 +1,12 @@
+[local]
+localhost
+
+[dev]
+foo.baz
+
+[dev:vars]
+ansible_user=foobar
+ansible_pass=foobaz
+host=foo.baz
+ansible_ssh_common_args='-o ProxyCommand="sshpass -p {{ansible_pass}} ssh -p 22 -W %h:%p -q {{ansible_user}}@{{host}}"'
+datadir=/foo/bar

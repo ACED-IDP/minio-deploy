@@ -2,18 +2,38 @@
 
 An Ansible playbook to install, configure, and deploy a Minio instance.
 
-Uses [ansible-role-minio](https://galaxy.ansible.com/ricsanfre/minio) by [ricsanfre](https://github.com/ricsanfre/) as the Ansible Role that will do a lot of the heavy lifting for us!
+Uses [ansible-minio](https://github.com/atosatto/ansible-minio) as the Ansible Role that will do a lot of the heavy lifting for us!
 
 ## Usage
 
-To install the required role and run the playbook run -- 
+Copy and edit the inventory file to fit your server and credentials: 
 
 ```sh
-ansible-galaxy install ricsanfre.minio
-ansible-playbook minio-deploy.yaml
+cp inventory-example inventory
+vi inventory
 ```
 
-## Installation
+Then run the following to install the required role and run the playbook -- 
+
+```sh
+ansible-galaxy install atosatto.minio
+ansible-playbook minio-deploy.yaml
+ansible-playbook minio-deploy.yaml -i inventory --ask-pass --ask-become
+```
+
+A given run is expected to take ~10 minutes to complete.
+
+To change the values provided to MinIO simply edit the inventory file and rerun the playbook command.
+
+## Requirements
+
+```sh
+python3 -m venv venv
+source ./venv/bin/activate
+pip install ansible
+```
+
+## Manual Minio Installation
 
 This playbook aims to replicate the steps used in the initial ACED-IDP Minio deployment at OHSU (based on CentOS).
 
@@ -36,8 +56,8 @@ test -f  /etc/default/minio || echo "creating /etc/default/minio"
 
 ## References
 
+- https://github.com/ricsanfre/ansible-role-minio
+    - An alternative Ansible Role with a self signed TLS step included
+
 - https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html
     -  The official Ansible Playbook documentation.
-
-- https://github.com/atosatto/ansible-minio:
-    - An alternative Ansible Role -- popular (100 GH stars), but somewhat outdated Ubuntu versions.
