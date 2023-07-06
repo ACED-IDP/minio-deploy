@@ -4,6 +4,9 @@ An Ansible playbook to install, configure, and deploy a Minio instance.
 
 Uses [ansible-minio](https://github.com/atosatto/ansible-minio) as the Ansible Role that will do a lot of the heavy lifting for us!
 
+## High Level Architecture
+
+![High level diagram of the MinIO architecture](./High-Level-ACED-Architecture.png)
 ## Usage
 
 Copy and edit the inventory file to fit your server and credentials: 
@@ -25,13 +28,33 @@ A given run is expected to take ~10 minutes to complete.
 
 To change the values provided to MinIO simply edit the inventory file and rerun the playbook command.
 
-## Requirements
+## Running the Playbook
 
 ```sh
 python3 -m venv venv
 source ./venv/bin/activate
 pip install ansible
 ```
+
+## Requirements
+
+- Virtual Machine (VM): the VM is the server that will is expected to run the MinIO server
+    - Recommended distros include:
+        - [RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) or derivate such as [Rocky Linux](https://rockylinux.org/)
+        - [Ubuntu](https://ubuntu.com/download/server) or similar Debian-based distribution
+    - Port 443 must be open and accessible from the external internet to access the MinIO endpoint
+    - It is recommended to run a firewall service (e.g. [firewalld](https://firewalld.org/)) for security purposes
+- Domain name: a dedicated URL that will be used as the endpoint for the MinIO server
+- SSL Certificate: certificate and key files that will be used to serve MinIO on port 443 via Nginx 
+    - [Cerbot](https://certbot.eff.org/) by the [EFF](https://www.eff.org/) is a service that can generate SSL certificate following domain validation. 
+
+### IT Tasks
+
+- Allocate VM with space for data storage (e.g. One of our MinIO servers has a data mount storage of 5 TB's)
+- Create SSL certificate (and key file) for use with Nginx. Services such as [Certbot](https://certbot.eff.org/) can be helpful in this case
+- Keep SSL certificate up to date (automatic renewal is recommended)
+- Keep VM up to date via official security channels or patched (e.g. following [RHEL](https://access.redhat.com/security/security-updates/) or [Ubuntu](https://ubuntu.com/security/notices) security updates).
+
 ## Next Steps
 
 ### 1. Nginx installation
