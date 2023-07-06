@@ -51,9 +51,9 @@ pip install ansible
 ### IT Tasks
 
 - Allocate VM with space for data storage (e.g. One of our MinIO servers has a data mount storage of 5 TB's)
-- Create SSL certificate (and key file) for use with Nginx. Services such as [Certbot](https://certbot.eff.org/) can be helpful in this case
-- Keep SSL certificate up to date (automatic renewal is recommended)
-- Keep VM up to date via official security channels or patched (e.g. following [RHEL](https://access.redhat.com/security/security-updates/) or [Ubuntu](https://ubuntu.com/security/notices) security updates).
+- Create the SSL certificate (and key file) for use with Nginx. Services such as [Certbot](https://certbot.eff.org/) can be helpful in this case
+- Keep the SSL certificate up to date (automatic renewal is recommended)
+- Keep VM up to date via official security channels or patches (e.g. following [RHEL](https://access.redhat.com/security/security-updates/) or [Ubuntu](https://ubuntu.com/security/notices) security updates)
 
 ## Next Steps
 
@@ -62,7 +62,7 @@ pip install ansible
 Nginx can now be installed to provide a web server for MinIO.
 
 ```sh
-# Ubuntu running SystemD example
+# Ubuntu running systemd example
 apt-get update
 apt-get install nginx
 systemctl start nginx
