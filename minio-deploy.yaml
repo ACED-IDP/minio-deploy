@@ -1,7 +1,15 @@
-- name: "Install Minio"
+- name: Install MinIO
   hosts: dev
   become: yes
   roles:
     - { role: atosatto.minio }
   vars:
     minio_server_datadirs: [ "{{datadir}}" ]
+
+- name: Install Nginx
+  hosts: dev
+  tasks:
+      ansible.builtin.include_role:
+        name: ansible-role-nginx
+      vars:
+        nginx_branch: stable

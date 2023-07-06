@@ -32,6 +32,41 @@ python3 -m venv venv
 source ./venv/bin/activate
 pip install ansible
 ```
+## Next Steps
+
+### 1. Nginx installation
+
+Nginx can now be installed to provide a web server for MinIO.
+
+```sh
+# Ubuntu running SystemD example
+apt-get update
+apt-get install nginx
+systemctl start nginx
+systemctl enable nginx
+
+cp minio.conf /etc/nginx/conf.d/minio.conf
+systemctl reload nginx
+```
+
+### 2. Credentials & User Management
+
+[MinIO Reference](https://min.io/docs/minio/linux/administration/identity-access-management/minio-user-management.html#create-a-user)
+
+Set MinIO admin credentials in `/etc/default/minio`:
+
+```
+MINIO_ROOT_USER=<admin_username>
+MINIO_ROOT_PASSWORD=<admin_password>
+```
+
+Create initial user with `readwrite` permissions via the `mc` command or through the web console:
+
+![MinIO user creation](./minio-user.png)
+
+### 3. Data Upload & Download
+
+It should now be possible to access the MinIO endpoint using the newly created user for data upload and download tasks.
 
 ## Manual Minio Installation
 
